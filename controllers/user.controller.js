@@ -3,10 +3,11 @@
 //Utils
 const {catchAsync} =require('../utils/catchAsync.util')
 const  bcrypt = require('bcryptjs'); // -- > Esta libreria funciona para encriptar la contraseña
-
+const { AppError } = require('../utils/appError.util')
 // Models
 
 const { User } = require('../models/users.model');
+
 
 
 const singUp = catchAsync(
@@ -48,17 +49,34 @@ const getUsers = catchAsync(
 const login = catchAsync(
     async (req,res,next) => {
 
+        // Recibir usuario del front
         const { email, password } = req.body;
 
-        User.findOne({
+        // Validar email
+        const userOkay = await User.findOne({
           where : { 
             email, 
             status:'active'
           }
         })
-        //validar password
-        // generate jwt
-        // send response
+
+        if(!userOkay){
+           
+            return next( new AppError('email and password wrong'),400)
+        }
+
+        const passOkay =  await bcrypt.compare(password, userOkay.password)
+
+        if(!passOkay){
+            return next( new AppError('email and password wrong'), 400);
+        }
+   
+
+    
+       res.status(200).json({
+            status:"succes",
+
+       })
 
     }
 )
