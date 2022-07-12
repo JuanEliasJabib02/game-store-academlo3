@@ -1,5 +1,5 @@
 const express = require('express');
-const { addConsole, getConsoles, updateTitleConsole, deleteConsole } = require('../controllers/console.controller');
+const { addConsole, getConsoles, updateTitleConsole, deleteConsole, assignGame, test } = require('../controllers/console.controller');
 const { consoleExist } = require('../middleware/console.middleware');
 const { validateUser } = require('../middleware/user.middleware');
 
@@ -14,4 +14,20 @@ consoleRouter.get('/', validateUser,getConsoles)
 consoleRouter.patch('/:id', validateUser,consoleExist, updateTitleConsole)
 consoleRouter.delete('/:id',validateUser,consoleExist, deleteConsole)
 
+consoleRouter.post('/assign-game', assignGame) // Para asignar los juegos que estan en cada consola relacion mucho a muchos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+consoleRouter.get('/test', test)
 module.exports = { consoleRouter }

@@ -75,7 +75,7 @@ const login = catchAsync(
         }
 
         const token =  await jwt.sign({ id: userOkay.id}, process.env.JWT_LOGIN, {
-            expiresIn: "10m", // Este token dura 5m
+            expiresIn: "1d", // Este token dura 5m
         }) 
                   // Meto dentro del token el id del usuario, la firma , tiempo de vida del token
    

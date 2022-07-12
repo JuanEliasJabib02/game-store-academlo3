@@ -1,6 +1,7 @@
-const { db } = require("../utils/database.util");
+const { db , DataTypes} = require("../utils/database.util");
 
-const gamesInconsole = db.define('gamesinconsole',{
+const gamesInconsole = db.define('gamesInConsole',{
+    
     id:{
         primaryKey:true,
         autoIncrement:true,
@@ -21,3 +22,6 @@ const gamesInconsole = db.define('gamesinconsole',{
         defaultValue: 'active' 
     }
 })
+
+
+module.exports = { gamesInconsole }

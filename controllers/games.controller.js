@@ -31,10 +31,11 @@ const createGame = catchAsync(
 const getGames = catchAsync(
     async (req,res,next) => {
 
-        const games = await Game.findAll({
-            include:{model: Console},
-            include:{model: Review},
-        })
+        const games = await Game.findAll( {
+            attributes:["title","genre"],
+            where: { status:'active'},
+            include: {model: Console, attributes:["name","company"]}
+        });
 
         res.status(200).json({
             status:"succes",
@@ -78,7 +79,13 @@ const deleteGame = catchAsync(
        
     })
 
+    const addReview = catchAsync(
+        async (req,res,next) => {
+            console.log("work")
+        }
+    )
+
   
 
 
-module.exports = { createGame ,getGames, updateGame, deleteGame}
+module.exports = { createGame ,getGames, updateGame, deleteGame ,addReview}
