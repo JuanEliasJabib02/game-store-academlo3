@@ -13,6 +13,7 @@ const { User } = require('../models/users.model');
 dotenv.config( {path:'./config.env'});
 
 const singUp = catchAsync(
+    
     async (req,res,next) => {
         const { name, email, password} = req.body;
 
