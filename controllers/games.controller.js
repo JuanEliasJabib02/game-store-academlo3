@@ -7,6 +7,8 @@ const { Game } = require('../models/games.model');
 const { Console } = require('../models/consoles.model');
 const { Review } = require('../models/reviews.model');
 
+
+
 const createGame = catchAsync(
 
     async (req,res,next) => {
@@ -32,9 +34,10 @@ const getGames = catchAsync(
     async (req,res,next) => {
 
         const games = await Game.findAll( {
-            attributes:["title","genre"],
+            attributes:["title","genre","id"],
             where: { status:'active'},
-            include: {model: Console, attributes:["name","company"]}
+            include: {model: Console, attributes:["name","company"]},
+            include: {model: Review, attributes:["comment"]}
         });
 
         res.status(200).json({
@@ -81,7 +84,22 @@ const deleteGame = catchAsync(
 
     const addReview = catchAsync(
         async (req,res,next) => {
-            console.log("work")
+           const { comment,} = req.body;
+
+           const { gameId } =req.params
+
+           const { userActive } =req;
+
+           const newReview = await Review.create({
+             comment,
+             gameId,
+             userId: userActive.id /* Para que se le ponga dinamico el id traigo el usuario de la sesion es el id logeado y ese es el mismo id del usuario que esta creando el review */
+           })
+
+           res.status(200).json({
+            status:"succes",
+            newReview
+           })
         }
     )
 
