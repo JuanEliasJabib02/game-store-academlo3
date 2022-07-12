@@ -9,12 +9,14 @@ const { globalErrorHandler} = require('./controllers/error.controller')
 const { usersRouter } = require('./routes/user.routes')
 
 const { gamesRouter } = require('./routes/games.routes');
+const { consoleRouter } = require('./routes/console.routes');
 
 
 //ENDPOINTS
 
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/games', gamesRouter);
+app.use('/api/v1/consoles', consoleRouter);
 
 
 
