@@ -45,4 +45,40 @@ const getGames = catchAsync(
     }
 )
 
-module.exports = { createGame ,getGames}
+const updateGame = catchAsync(
+    async (req,res,next) => {
+    
+        const { game } = req;
+
+        const {title} = req.body;
+
+        await game.update({ title})
+
+        res.status(204).json(
+        {
+            status:"sucess",
+        })
+        }
+)
+
+
+const deleteGame = catchAsync(
+    async (req,res,) => {
+
+        const { game } = req;
+
+        await game.update({status:"disabled"})
+       
+        
+        res.status(200).json(
+            {
+                status:"succes"
+            }
+        )
+       
+    })
+
+  
+
+
+module.exports = { createGame ,getGames, updateGame, deleteGame}

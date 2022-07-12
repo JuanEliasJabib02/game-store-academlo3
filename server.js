@@ -37,7 +37,7 @@ db.authenticate()
     .catch(err => console.log(err));
 
 
-app.listen(4111, () => {
+app.listen(4001, () => {
     console.log("game store working")
     
 });

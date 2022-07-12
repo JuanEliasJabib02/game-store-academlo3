@@ -13,7 +13,7 @@ const { User } = require('../models/users.model');
 dotenv.config( {path:'./config.env'});
 
 const singUp = catchAsync(
-    
+
     async (req,res,next) => {
         const { name, email, password} = req.body;
 
@@ -75,7 +75,7 @@ const login = catchAsync(
         }
 
         const token =  await jwt.sign({ id: userOkay.id}, process.env.JWT_LOGIN, {
-            expiresIn: "5m", // Este token dura 5m
+            expiresIn: "10m", // Este token dura 5m
         }) 
                   // Meto dentro del token el id del usuario, la firma , tiempo de vida del token
    
